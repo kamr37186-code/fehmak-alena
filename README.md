@@ -88,3 +88,4 @@ When the backend starts and the `seed_database.js` script is run, it seeds the d
 - `scripts/`: Helper scripts like `run.bat` for quickly booting both environments.
 # fehmak-alena
 # fehmak-alena
+# fehmak-alena
