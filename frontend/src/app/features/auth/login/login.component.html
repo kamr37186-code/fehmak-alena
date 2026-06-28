@@ -1,0 +1,161 @@
+<div class="auth-container w-full h-screen flex flex-col lg:flex-row font-sans">
+
+  <!-- Left: Auth Form Side -->
+  <div class="w-full lg:w-1/2 flex flex-col justify-center px-6 sm:px-12 lg:px-24 xl:px-32 relative z-20 h-full pt-4 pb-4">
+
+    <!-- Header / Logo -->
+    <div class="flex items-center gap-3 mb-6 auth-stagger">
+      <img src="assets/NTG Logo Digital Transformation.png" alt="NTG Logo" class="h-10 w-auto">
+      <span class="text-brand-1000 font-extrabold text-3xl tracking-tight">Fahmak <span class="text-brand-600">Alena</span></span>
+    </div>
+
+    <!-- Title -->
+    <div class="auth-stagger mb-4">
+      <h2 class="text-3xl font-black text-gray-900 tracking-tight mb-1">
+        Welcome back.
+      </h2>
+      <p class="text-gray-500 text-base">
+        Sign in to your <span class="font-bold text-gray-800">{{ activeModule() | titlecase }}</span> portal, or
+        <a routerLink="/register" class="text-brand-600 font-bold hover:text-brand-700 transition-colors">create an account</a>.
+      </p>
+    </div>
+
+    <!-- Main Glass Form Container -->
+    <div class="glass-panel rounded-[2rem] p-6 auth-stagger relative max-w-md mx-auto w-full lg:mx-0 lg:max-w-none">
+
+      <!-- Portal Selection Tabs -->
+      <div class="bg-gray-100/50 p-1 rounded-xl mb-4 flex space-x-1 shadow-inner border border-white/50 relative z-10 backdrop-blur-md">
+        <button type="button"
+          (click)="setModule('STUDENT')"
+          [ngClass]="activeModule() === 'STUDENT' ? 'bg-white text-brand-700 shadow-sm border-white font-bold' : 'text-gray-500 hover:text-gray-800 font-medium'"
+          class="flex-1 py-2.5 text-sm rounded-lg transition-all border border-transparent">
+          Student
+        </button>
+        <button type="button"
+          (click)="setModule('INSTRUCTOR')"
+          [ngClass]="activeModule() === 'INSTRUCTOR' ? 'bg-white text-brand-700 shadow-sm border-white font-bold' : 'text-gray-500 hover:text-gray-800 font-medium'"
+          class="flex-1 py-2.5 text-sm rounded-lg transition-all border border-transparent">
+          Instructor
+        </button>
+      </div>
+
+      <form class="space-y-4 relative z-10" (ngSubmit)="onSubmit()">
+        <div>
+          <label for="email" class="block text-sm font-bold text-gray-700 mb-1">Email address</label>
+          <input id="email" name="email" [ngModel]="email()" (ngModelChange)="email.set($event)" type="email" autocomplete="email" required
+            class="premium-input block w-full px-4 py-2.5 rounded-xl text-gray-900 focus:outline-none placeholder-gray-400">
+        </div>
+
+        <div>
+          <label for="password" class="block text-sm font-bold text-gray-700 mb-1">Password</label>
+          <input id="password" name="password" [ngModel]="password()" (ngModelChange)="password.set($event)" type="password" autocomplete="current-password" required
+            class="premium-input block w-full px-4 py-2.5 rounded-xl text-gray-900 focus:outline-none placeholder-gray-400">
+        </div>
+
+        <div class="flex items-center justify-between pt-1">
+          <div class="flex items-center gap-2">
+            <input id="remember-me" name="remember-me" type="checkbox" class="w-4 h-4 text-brand-600 focus:ring-brand-500 border-gray-300 rounded cursor-pointer">
+            <label for="remember-me" class="block text-sm font-medium text-gray-600 cursor-pointer">Remember me</label>
+          </div>
+          <a href="#" class="text-sm font-bold text-brand-600 hover:text-brand-500">Forgot password?</a>
+        </div>
+
+        @if (error()) {
+          <div class="text-sm text-red-600 bg-red-50 p-3 rounded-xl border border-red-100 font-medium flex items-center gap-2">
+            <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>
+            {{ error() }}
+          </div>
+        }
+
+        <button type="submit" [disabled]="!isFormValid() || isLoading()"
+          class="w-full flex justify-center items-center gap-2 py-3 px-4 rounded-xl shadow-lg shadow-brand-500/30 text-white font-bold text-base bg-gradient-to-r from-brand-600 to-brand-500 hover:to-brand-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 transition-all disabled:opacity-50 hover:-translate-y-0.5">
+          @if (isLoading()) {
+            <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+          }
+          @if (!isLoading()) {
+            <span>Sign in to Dashboard</span>
+          }
+        </button>
+      </form>
+
+      <div class="mt-6 relative z-10">
+        <div class="relative flex justify-center text-sm">
+          <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-200"></div></div>
+          <span class="px-4 bg-white text-gray-400 font-medium rounded-full relative">Or continue with</span>
+        </div>
+
+        <div class="mt-4 flex justify-center gap-4 relative">
+          <!-- Fallback Google SVG and Google iframe container -->
+          <div class="relative w-10 h-10 flex justify-center items-center border border-[#dadce0] rounded-full shadow-sm bg-white hover:bg-gray-50 transition-colors overflow-hidden">
+            <!-- The actual Google iframe will be injected inside #google-btn-login -->
+            <div id="google-btn-login" class="absolute inset-0 z-10 w-full h-full flex justify-center items-center opacity-0.01"></div>
+            <!-- Fallback SVG that is always visible if iframe is transparent or fails -->
+            <svg class="w-5 h-5 absolute z-0 pointer-events-none" viewBox="0 0 48 48">
+              <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+              <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+              <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+              <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+              <path fill="none" d="M0 0h48v48H0z"/>
+            </svg>
+          </div>
+
+          <button type="button" (click)="handleFacebookLogin()" class="flex justify-center items-center w-10 h-10 border border-[#dadce0] rounded-full shadow-sm bg-white hover:bg-gray-50 transition-colors">
+            <svg class="w-5 h-5 text-[#1877F2]" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: 3D Animated Graphic Side -->
+  <div class="hidden lg:flex w-1/2 relative bg-brand-50 overflow-hidden items-center justify-center perspective-1000">
+    <!-- Glowing Blobs -->
+    <div class="absolute w-[500px] h-[500px] bg-brand-300 rounded-full glow-blob top-1/4 -right-20 animate-pulse"></div>
+    <div class="absolute w-[400px] h-[400px] bg-brand-200 rounded-full glow-blob bottom-10 left-10 animate-pulse" style="animation-delay: 2s;"></div>
+
+    <!-- 3D Graphic Composition -->
+    <div class="relative w-full h-full max-w-lg flex items-center justify-center z-20 graphic-3d" style="transform-style: preserve-3d; perspective: 1200px;">
+
+      <!-- Welcome Card (Back Left) -->
+      <div class="absolute w-72 h-80 glass-panel-dark rounded-[2.5rem] p-8 flex flex-col justify-between animate-float-medium transition-all duration-700 cursor-pointer" style="transform: translate(-100px, -60px) translateZ(-100px) rotateY(15deg) rotate(-5deg);">
+        <div>
+          <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center mb-6 border border-white/20">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-2">Secure Access</h3>
+          <p class="text-gray-400 text-sm">Enterprise-grade encryption protecting your learning data.</p>
+        </div>
+        <div class="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+          <div class="w-full h-full bg-brand-400 animate-pulse"></div>
+        </div>
+      </div>
+
+      <!-- Progress Card (Front Right) -->
+      <div class="absolute w-80 h-72 glass-panel rounded-[2.5rem] p-8 flex flex-col justify-between animate-float-fast z-20 transition-all duration-700 cursor-pointer" style="transform: translate(80px, 80px) translateZ(80px) rotateY(-10deg) rotate(5deg);">
+        <div>
+          <h4 class="text-gray-900 font-extrabold text-xl mb-4">Weekly Goal</h4>
+          <!-- Curved SVG Chart -->
+          <div class="w-full h-24 relative flex items-end">
+            <svg viewBox="0 0 100 40" class="w-full h-full overflow-visible drop-shadow-[0_5px_10px_rgba(14,165,233,0.3)]">
+              <path class="chart-line" d="M0,40 Q25,10 50,20 T100,5" fill="none" stroke="url(#loginGrad)" stroke-width="4" stroke-linecap="round"></path>
+              <defs>
+                <linearGradient id="loginGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="var(--color-brand-300)" />
+                  <stop offset="100%" stop-color="var(--color-brand-500)" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 bg-brand-50 p-4 rounded-2xl border border-brand-100">
+          <div class="w-10 h-10 bg-brand-500 rounded-full flex items-center justify-center text-white font-bold shadow-md shadow-brand-500/50">✓</div>
+          <div>
+            <div class="text-brand-900 font-bold">On Track</div>
+            <div class="text-brand-600 text-xs">Keep up the momentum!</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

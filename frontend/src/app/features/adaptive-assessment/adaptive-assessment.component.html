@@ -1,0 +1,173 @@
+<div class="min-h-screen bg-white relative">
+  <!-- Loading Overlay -->
+  @if (isLoading) {
+    <div class="absolute inset-0 bg-white/80 backdrop-blur-sm z-50 flex flex-col items-center justify-center">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-600 mb-4"></div>
+      <h2 class="text-xl font-bold text-gray-900">Loading Assessment...</h2>
+    </div>
+  }
+
+  <div class="bg-red-50 text-red-600 px-8 py-2 text-sm font-semibold flex items-center justify-center gap-2">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+    Proctored Assessment: Window focus and clipboard activity are being monitored.
+  </div>
+
+  <!-- Top Bar -->
+  <div class="border-b border-gray-200 px-8 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-6">
+      <div>
+        <span class="text-xs text-gray-500">Quiz</span>
+        <span class="text-sm font-bold text-gray-900 ml-2">{{ activeQuiz?.title }}</span>
+      </div>
+    </div>
+    <div class="flex items-center gap-4">
+      <span class="px-4 py-1.5 bg-red-50 text-red-600 text-xs font-bold rounded-full border border-red-200 flex items-center gap-1.5">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+        {{ activeQuiz?.difficultyLevel | uppercase }}
+      </span>
+      <div class="flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-xl border border-gray-200">
+        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <span class="text-lg font-bold text-gray-900">{{ timer }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="max-w-6xl mx-auto py-10 px-8 grid grid-cols-12 gap-10">
+    <!-- Question Panel -->
+    <div class="col-span-7">
+      <div class="bg-white rounded-2xl border border-gray-200 border-dashed p-10 min-h-[500px]">
+        @if (currentQuestion) {
+          <div>
+            <div class="flex items-center gap-2 mb-6">
+              <span class="w-8 h-8 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center text-sm font-bold">?</span>
+              <span class="text-sm font-bold text-brand-600 uppercase tracking-wide">Question</span>
+            </div>
+            <h2 class="text-2xl font-extrabold text-gray-900 leading-snug mb-10">
+              {{ currentQuestion.questionText }}
+            </h2>
+            <!-- Answer Options -->
+            <div class="space-y-4">
+              @for (opt of parsedOptions; track opt; let i = $index) {
+                <label
+                  (click)="selectAnswer(opt)"
+                  [class.border-brand-500]="selectedAnswer === opt"
+                  [class.bg-brand-50]="selectedAnswer === opt"
+                  [class.border-gray-200]="selectedAnswer !== opt"
+                  [class.opacity-50]="isSubmitting || isCorrect === true"
+                  [class.pointer-events-none]="isSubmitting || isCorrect === true"
+                  class="flex items-start gap-4 p-5 rounded-xl border-2 cursor-pointer hover:border-brand-300 hover:bg-brand-50/30 transition-all group">
+                  <span [class.bg-brand-100]="selectedAnswer === opt"
+                    [class.text-brand-600]="selectedAnswer === opt"
+                    [class.bg-gray-100]="selectedAnswer !== opt"
+                    [class.text-gray-500]="selectedAnswer !== opt"
+                    class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5 transition-colors group-hover:bg-brand-100 group-hover:text-brand-600">
+                    {{ ['A', 'B', 'C', 'D'][i] }}
+                  </span>
+                  <span [class.font-medium]="selectedAnswer === opt"
+                    [class.text-gray-900]="selectedAnswer === opt"
+                    [class.text-gray-700]="selectedAnswer !== opt"
+                    class="group-hover:text-gray-900 transition-colors">
+                    {{ opt }}
+                  </span>
+                </label>
+              }
+            </div>
+            <!-- Navigation -->
+            <div class="flex items-center justify-between mt-10">
+              <div></div> <!-- Spacer -->
+              <button (click)="submitAnswer()"
+                [disabled]="!selectedAnswer || isSubmitting || isCorrect === true"
+                [class.opacity-50]="!selectedAnswer || isSubmitting || isCorrect === true"
+                class="px-8 py-2.5 bg-brand-500 text-white rounded-lg font-medium hover:bg-brand-600 shadow-md transition-all flex items-center gap-2">
+                @if (!isSubmitting) {
+                  <span>Submit Answer</span>
+                }
+                @if (isSubmitting) {
+                  <span>Analyzing...</span>
+                }
+                @if (!isSubmitting) {
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                }
+                @if (isSubmitting) {
+                  <svg class="animate-spin w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                }
+              </button>
+            </div>
+          </div>
+        }
+        @if (!currentQuestion && !isLoading) {
+          <div class="text-center py-20">
+            <p class="text-gray-500">No questions available in this quiz.</p>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- AI Feedback Sidebar -->
+    <div class="col-span-5">
+      <div class="bg-gradient-to-b from-blue-50 to-white rounded-2xl border border-blue-100 border-dashed p-8 h-full flex flex-col items-center justify-center text-center relative overflow-hidden"
+        [class.from-green-50]="isCorrect === true"
+        [class.border-green-200]="isCorrect === true"
+        [class.from-red-50]="isCorrect === false"
+        [class.border-red-200]="isCorrect === false">
+
+        <!-- Default State -->
+        @if (!aiFeedback && isCorrect === null) {
+          <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">AI Feedback Pending</h3>
+          <p class="text-gray-500 text-sm leading-relaxed max-w-xs">Submit your answer to receive real-time analysis, logic breakdown, and recommended learning resources.</p>
+        }
+
+        <!-- Feedback State -->
+        @if (aiFeedback || isCorrect !== null) {
+          <!-- Icon -->
+          <div class="w-16 h-16 rounded-full flex items-center justify-center mb-6"
+            [class.bg-green-100]="isCorrect === true"
+            [class.text-green-600]="isCorrect === true"
+            [class.bg-red-100]="isCorrect === false"
+            [class.text-red-600]="isCorrect === false"
+            [class.bg-blue-100]="isSubmitting"
+            [class.text-blue-500]="isSubmitting">
+            @if (isSubmitting) {
+              <svg class="animate-spin w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+            }
+            @if (!isSubmitting && isCorrect === true) {
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            }
+            @if (!isSubmitting && isCorrect === false) {
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            }
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-4"
+            [class.text-green-700]="isCorrect === true"
+            [class.text-red-700]="isCorrect === false">
+            @if (isSubmitting) {
+              <span>Analyzing...</span>
+            }
+            @if (!isSubmitting && isCorrect === true) {
+              <span>Correct!</span>
+            }
+            @if (!isSubmitting && isCorrect === false) {
+              <span>Not Quite</span>
+            }
+          </h3>
+          <div class="text-left w-full bg-white/80 rounded-xl p-5 shadow-sm border border-white">
+            <div class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-brand-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+              <p class="text-gray-700 text-sm leading-relaxed">{{ aiFeedback }}</p>
+            </div>
+          </div>
+          @if (!isSubmitting && isCorrect === true) {
+            <button (click)="nextQuestion()" class="mt-8 px-6 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors w-full">Next Question</button>
+          }
+          @if (!isSubmitting && isCorrect === false) {
+            <button (click)="selectedAnswer = ''" class="mt-8 px-6 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors w-full">Try Another Answer</button>
+          }
+        }
+      </div>
+    </div>
+  </div>
+</div>

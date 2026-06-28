@@ -1,0 +1,24 @@
+{
+  "name": "fahmak-alena",
+  "version": "1.0.0",
+  "description": "A modern learning platform with AI-driven features, adaptive assessments, and immersive video classrooms.",
+  "main": "seed_database.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/youssef50505/Fahmak_3alena.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/youssef50505/Fahmak_3alena/issues"
+  },
+  "homepage": "https://github.com/youssef50505/Fahmak_3alena#readme",
+  "dependencies": {
+    "pg": "^8.21.0"
+  }
+}

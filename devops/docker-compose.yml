@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: fahmak-postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: fahmak_alena
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: fahmak-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+
+  db-backup:
+    image: postgres:15-alpine
+    container_name: fahmak-backup
+    volumes:
+      - ./backup:/scripts
+      - backup-data:/backups
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: fahmak_alena
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+      BACKUP_RETENTION_DAYS: 30
+    entrypoint: /bin/sh
+    command: >
+      -c "echo '0 2 * * * /scripts/backup.sh >> /var/log/backup.log 2>&1' | crontab - && crond -f"
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
+  redis-data:
+  backup-data:

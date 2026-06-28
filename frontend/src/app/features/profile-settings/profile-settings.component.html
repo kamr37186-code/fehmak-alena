@@ -1,0 +1,79 @@
+<div class="profile-container" #profileContainer>
+  <div class="profile-header">
+    <div class="header-icon">
+      <i class="fa-solid fa-user-edit"></i>
+    </div>
+    <h2>Profile Settings</h2>
+    <p>Update your personal information</p>
+  </div>
+
+  @if (isLoading()) {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading profile...</p>
+    </div>
+  }
+
+  @if (!isLoading() && userProfile) {
+    <div class="profile-content">
+      @if (successText()) {
+        <div class="success-alert" #successMessage>
+          <i class="fa-solid fa-check-circle"></i> {{ successText() }}
+        </div>
+      }
+      <form (ngSubmit)="onSubmit()" class="profile-form">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <div class="input-wrapper">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" id="firstName" name="firstName" [ngModel]="firstName()" (ngModelChange)="firstName.set($event)" #fname="ngModel" placeholder="Enter first name" minlength="2" required
+              [class.invalid]="fname.invalid && fname.touched">
+          </div>
+          @if (fname.invalid && fname.touched) {
+            <div class="error-msg">
+              First name is required (min 2 chars)
+            </div>
+          }
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <div class="input-wrapper">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" id="lastName" name="lastName" [ngModel]="lastName()" (ngModelChange)="lastName.set($event)" #lname="ngModel" placeholder="Enter last name" minlength="2" required
+              [class.invalid]="lname.invalid && lname.touched">
+          </div>
+          @if (lname.invalid && lname.touched) {
+            <div class="error-msg">
+              Last name is required (min 2 chars)
+            </div>
+          }
+        </div>
+        <div class="form-group disabled-group">
+          <label for="email">Email Address</label>
+          <div class="input-wrapper">
+            <i class="fa-solid fa-envelope"></i>
+            <input type="email" id="email" name="email" [ngModel]="email()" readonly>
+          </div>
+          <small class="help-text"><i class="fa-solid fa-info-circle"></i> Email address cannot be changed.</small>
+        </div>
+        <div class="form-group disabled-group">
+          <label>Account Role</label>
+          <div class="role-badge">
+            {{ userProfile.role }}
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn-save" [disabled]="!isFormValid() || isSaving()">
+            @if (!isSaving()) {
+              <i class="fa-solid fa-save"></i>
+            }
+            @if (isSaving()) {
+              <i class="fa-solid fa-spinner fa-spin"></i>
+            }
+            {{ isSaving() ? 'Saving...' : 'Save Changes' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  }
+</div>

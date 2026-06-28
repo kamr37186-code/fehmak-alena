@@ -1,0 +1,186 @@
+<div class="max-w-7xl mx-auto space-y-6 pb-12">
+  <!-- Header -->
+  <div class="flex items-start justify-between">
+    <div class="flex items-start gap-4">
+      <div class="w-14 h-14 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"></path></svg>
+      </div>
+      <div>
+        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Interactive {{ session?.modelName || 'Anatomy' }}</h1>
+        <p class="text-gray-500 mt-1 flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          Module 4: Cardiovascular Structures · 15 mins remaining
+        </p>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <button class="px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition-colors shadow-sm flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        Reset Model
+      </button>
+      <button class="px-5 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 font-medium shadow-md transition-all">Next Section</button>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-12 gap-6">
+    <!-- 3D Viewport -->
+    <div class="col-span-7">
+      <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl overflow-hidden aspect-video relative shadow-lg">
+        <div class="absolute top-4 left-4 right-4 pointer-events-none z-10">
+          <p class="text-xs text-gray-400 uppercase tracking-wider drop-shadow-md">Biology Series <span class="mx-2">›</span> Cardiovascular System</p>
+          <h3 class="text-2xl font-extrabold text-white mt-1 drop-shadow-md">Left Ventricle Dynamics</h3>
+        </div>
+        <!-- Sketchfab Embed -->
+        <div class="absolute inset-0 z-0 sketchfab-embed-wrapper">
+          <iframe title="Human Heart"
+            class="w-full h-full border-0"
+            frameborder="0"
+            allowfullscreen
+            mozallowfullscreen="true"
+            webkitallowfullscreen="true"
+            allow="autoplay; fullscreen; xr-spatial-tracking"
+            xr-spatial-tracking
+            execution-while-out-of-viewport
+            execution-while-not-rendered
+            web-share
+            src="https://sketchfab.com/models/2edbedffae6b49ee97f919a8528329ba/embed">
+          </iframe>
+        </div>
+      </div>
+
+      <!-- Stats Row -->
+      <div class="grid grid-cols-3 gap-4 mt-4">
+        <div class="bg-white rounded-xl border border-gray-100 p-4 flex items-center gap-3 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md">
+          <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-500 flex items-center justify-center">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <div>
+            <p class="text-[10px] text-gray-400 uppercase font-semibold">AI Score</p>
+            <p class="text-lg font-extrabold text-gray-900">{{ session?.aiScore || 0 }}% Mastery</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-100 p-4 flex items-center gap-3 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md">
+          <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-500 flex items-center justify-center">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+          </div>
+          <div>
+            <p class="text-[10px] text-gray-400 uppercase font-semibold">Collaborators</p>
+            <p class="text-lg font-extrabold text-gray-900">{{ peers.length }} Nearby</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-100 p-4 flex items-center gap-3 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md">
+          <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-500 flex items-center justify-center">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+          </div>
+          <div>
+            <p class="text-[10px] text-gray-400 uppercase font-semibold">Study Notes</p>
+            <p class="text-lg font-extrabold text-gray-900">{{ session?.notesGenerated || 0 }} Generated</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Panel: AI Transcript + Peer Tutoring -->
+    <div class="col-span-5 space-y-6">
+      <!-- AI Lesson Transcript -->
+      <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+        <div class="flex items-center justify-between mb-5">
+          <h3 class="font-bold text-gray-900 flex items-center gap-2">
+            <svg class="w-5 h-5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+            AI Lesson Transcript
+          </h3>
+          <button (click)="toggleTranscript()" class="flex items-center gap-1.5 px-3 py-1.5 bg-brand-50 text-brand-600 text-xs font-bold rounded-full hover:bg-brand-100 transition-colors">
+            @if (!isPlayingTranscript) {
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6V4z"></path></svg>
+            }
+            @if (isPlayingTranscript) {
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M5 4h3v12H5V4zm7 0h3v12h-3V4z"></path></svg>
+            }
+            {{ isPlayingTranscript ? 'PAUSE' : 'PLAY' }}
+          </button>
+        </div>
+        <div class="space-y-4 text-sm max-h-[200px] overflow-y-auto pr-2 custom-scrollbar">
+          @for (item of transcript; track item; let i = $index) {
+            <div
+              class="flex gap-3 transition-all duration-300"
+              [ngClass]="{'bg-brand-50 rounded-lg p-3 border-l-4 border-brand-500': i === currentTranscriptIndex}">
+              <span class="text-xs w-10 flex-shrink-0 pt-0.5 transition-colors duration-300"
+                [ngClass]="i === currentTranscriptIndex ? 'text-brand-400 font-bold' : 'text-gray-400'">
+                {{ item.time }}
+              </span>
+              <p class="transition-colors duration-300"
+                [ngClass]="i === currentTranscriptIndex ? 'text-brand-700 font-medium' : 'text-gray-600'">
+                {{ item.text }}
+              </p>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Key Takeaways -->
+      <div>
+        <h3 class="font-bold text-gray-900 flex items-center gap-2 mb-3">
+          <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+          Key Takeaways <span class="text-xs font-normal text-gray-400 ml-2">(Click to generate note)</span>
+        </h3>
+        <div class="space-y-2">
+          @for (takeaway of takeaways; track takeaway) {
+            <div
+              (click)="generateNote(takeaway)"
+              class="bg-white rounded-xl border border-gray-100 px-4 py-3 flex items-center gap-3 shadow-sm hover:shadow-md hover:border-brand-200 transition-all cursor-pointer group">
+              <div class="w-6 h-6 rounded bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-brand-50 group-hover:text-brand-500 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+              </div>
+              <span class="text-sm text-gray-700 font-medium">{{ takeaway }}</span>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Peer Tutoring Matching -->
+      <div class="bg-gradient-to-br from-blue-50 to-brand-50 rounded-2xl border border-brand-100 p-6 relative overflow-hidden">
+        <div class="relative z-10">
+          <h3 class="font-bold text-gray-900 flex items-center gap-2 mb-2">
+            <svg class="w-5 h-5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            Peer Tutoring Matching
+          </h3>
+          <p class="text-xs text-gray-500 mb-4">These peers are currently studying this model. Join a voice group to discuss.</p>
+
+          <div class="space-y-3 mb-4 min-h-[100px]">
+            @if (isSearchingPeers) {
+              <div class="flex flex-col items-center justify-center py-4">
+                <svg class="w-8 h-8 animate-spin text-brand-500 mb-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                <p class="text-xs text-brand-600 font-medium animate-pulse">Scanning global network...</p>
+              </div>
+            }
+
+            @if (!isSearchingPeers) {
+              @for (peer of peers; track peer) {
+                <div class="flex items-center justify-between bg-white/80 backdrop-blur-sm rounded-xl p-3 shadow-sm hover:shadow-md transition-shadow">
+                  <div class="flex items-center gap-3">
+                    <img class="w-9 h-9 rounded-full border-2 border-white shadow-sm" [src]="peer.avatarUrl" [alt]="peer.name">
+                    <div>
+                      <p class="text-sm font-bold text-gray-900">{{ peer.name }}</p>
+                      <p class="text-[10px] text-brand-600 font-medium">{{ peer.level }}</p>
+                    </div>
+                  </div>
+                  <button class="w-8 h-8 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center hover:bg-brand-500 hover:text-white transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+                  </button>
+                </div>
+              }
+            }
+          </div>
+
+          <button (click)="searchPeers()" [disabled]="isSearchingPeers"
+            class="w-full py-2.5 bg-brand-600 text-white rounded-xl font-medium text-sm hover:bg-brand-700 shadow-md transition-all disabled:opacity-50">
+            {{ isSearchingPeers ? 'Searching...' : 'Quick Match Search' }}
+          </button>
+        </div>
+        <!-- Decorative bg elements -->
+        <div class="absolute -top-10 -right-10 w-40 h-40 bg-brand-200 rounded-full mix-blend-multiply filter blur-2xl opacity-50"></div>
+        <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-200 rounded-full mix-blend-multiply filter blur-2xl opacity-50"></div>
+      </div>
+    </div>
+  </div>
+</div>

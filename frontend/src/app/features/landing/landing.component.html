@@ -1,0 +1,240 @@
+<div class="min-h-screen bg-[#f8fafc] font-sans text-gray-900 selection:bg-brand-500 selection:text-white overflow-hidden relative">
+  
+  <!-- Premium Glass Navbar -->
+  <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
+      <div class="text-2xl font-bold tracking-tighter text-brand-1000 flex items-center">
+        <img src="assets/NTG Logo Digital Transformation.png" alt="NTG Logo" class="h-8 w-auto mr-3">
+        Fahmak<span class="text-brand-500">Alena</span>
+      </div>
+      <div class="hidden md:flex space-x-10 text-sm font-semibold text-gray-600">
+        <a href="#features" class="hover:text-brand-500 transition-colors">Features</a>
+        <a href="#how-it-works" class="hover:text-brand-500 transition-colors">How it works</a>
+        <a href="#testimonials" class="hover:text-brand-500 transition-colors">Testimonials</a>
+      </div>
+      <div class="flex items-center space-x-6">
+        <a routerLink="/login" class="text-sm font-bold text-gray-700 hover:text-brand-600 transition-colors">Log in</a>
+        <a routerLink="/register" class="bg-gray-900 hover:bg-black text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-lg transition-transform hover:scale-105">
+          Get Started
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <main class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+    <!-- Subtle Background Glows -->
+    <div class="absolute top-[10%] left-[-10%] w-[500px] h-[500px] bg-brand-100 rounded-full blur-[100px] opacity-60 pointer-events-none"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-brand-200 rounded-full blur-[100px] opacity-60 pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full grid lg:grid-cols-2 gap-12 items-center relative z-10">
+      
+      <!-- Hero Text (Left) -->
+      <div class="flex flex-col items-start text-left hero-content mt-10 lg:mt-0">
+        <div class="inline-flex items-center px-4 py-2 rounded-full bg-white border border-gray-200 text-brand-600 text-xs font-bold uppercase tracking-wider mb-8 shadow-sm">
+          <span class="flex h-2 w-2 rounded-full bg-brand-500 mr-3 animate-pulse"></span>
+          Next-Gen Learning Platform
+        </div>
+        
+        <h1 class="text-5xl lg:text-7xl xl:text-8xl font-black tracking-tighter text-gray-900 mb-8 leading-[1.1]">
+          Learn Faster<br/>
+          <span class="text-gradient">Aim Higher</span>
+        </h1>
+        
+        <p class="text-xl text-gray-500 mb-10 max-w-lg leading-relaxed font-medium">
+          Experience a revolutionary way to learn. Fahmak Alena adapts to your unique pace, 
+          providing dynamic assessments and interactive environments.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 w-full sm:w-auto">
+          <a routerLink="/register" class="w-full sm:w-auto bg-brand-500 hover:bg-brand-600 text-white px-10 py-5 rounded-full text-lg font-bold shadow-xl shadow-brand-500/30 transition-all hover:-translate-y-1 flex items-center justify-center">
+            Start Learning Free
+            <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Interactive Graphic (Right) -->
+      <div class="h-[500px] lg:h-[700px] w-full relative flex items-center justify-center lg:-mr-10 xl:-mr-20 mt-10 lg:mt-0">
+        <!-- Floating Glass Cards Composition (Tilted Stack) -->
+        <div class="relative w-full h-full max-w-lg flex items-center justify-center z-20 hero-graphic" style="transform-style: preserve-3d; perspective: 1200px;">
+           
+           <!-- Background Glow Blobs -->
+           <div class="absolute w-[400px] h-[400px] bg-brand-400 rounded-full glow-blob -top-10 -right-20 animate-pulse-slow"></div>
+           <div class="absolute w-[300px] h-[300px] bg-brand-200 rounded-full glow-blob bottom-0 -left-10 animate-pulse-slow" style="animation-delay: 2s;"></div>
+           
+           <!-- Card 1: Dark Analytics (Back Left) -->
+           <div class="absolute w-72 h-80 glass-panel-dark rounded-[2.5rem] p-6 flex flex-col gap-4 animate-float-slow transition-all duration-700 hover:-translate-y-8 cursor-pointer" style="transform: translate(-140px, -40px) translateZ(-150px) rotateY(15deg) rotate(-5deg);">
+              <div class="flex justify-between items-center mb-2">
+                 <h4 class="text-white font-bold tracking-wide">Performance</h4>
+                 <div class="px-3 py-1 bg-white/10 rounded-full text-xs text-white font-semibold">+24%</div>
+              </div>
+              <!-- Beautiful Curved SVG Chart -->
+              <div class="w-full h-32 relative flex items-end">
+                 <!-- Grid lines -->
+                 <div class="absolute inset-0 flex flex-col justify-between opacity-10 pointer-events-none">
+                    <div class="w-full h-px bg-white"></div>
+                    <div class="w-full h-px bg-white"></div>
+                    <div class="w-full h-px bg-white"></div>
+                 </div>
+                 <svg viewBox="0 0 100 40" class="w-full h-full overflow-visible drop-shadow-[0_5px_10px_rgba(14,165,233,0.5)]">
+                    <path class="chart-line" d="M0,40 Q15,30 25,35 T50,20 T75,10 T100,5" fill="none" stroke="url(#chartGrad)" stroke-width="4" stroke-linecap="round"></path>
+                    <defs>
+                       <linearGradient id="chartGrad" x1="0" y1="0" x2="1" y2="0">
+                          <stop offset="0%" stop-color="var(--color-brand-300)" />
+                          <stop offset="100%" stop-color="var(--color-brand-500)" />
+                       </linearGradient>
+                    </defs>
+                 </svg>
+              </div>
+              <div class="grid grid-cols-2 gap-4 mt-auto">
+                 <div class="bg-white/5 rounded-2xl p-4 border border-white/10">
+                    <div class="text-gray-400 text-xs mb-1">Focus Score</div>
+                    <div class="text-white font-bold text-lg">98/100</div>
+                 </div>
+                 <div class="bg-white/5 rounded-2xl p-4 border border-white/10">
+                    <div class="text-gray-400 text-xs mb-1">Study Hrs</div>
+                    <div class="text-white font-bold text-lg">42.5</div>
+                 </div>
+              </div>
+           </div>
+
+           <!-- Card 2: Main Achievement (Center) -->
+           <div class="absolute w-[340px] h-[420px] glass-panel rounded-[3rem] p-8 flex flex-col items-center text-center animate-float-medium z-10 transition-all duration-700 hover:-translate-y-8 cursor-pointer" style="transform: translate(0px, 0px) translateZ(50px) rotateY(5deg);">
+              <div class="w-16 h-16 bg-gradient-to-tr from-brand-500 to-brand-300 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-brand-500/30 mb-6 mt-4">
+                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+              </div>
+              <h3 class="text-2xl font-extrabold text-gray-900 mb-2 tracking-tight">Machine Learning</h3>
+              <p class="text-gray-500 font-medium mb-8">Advanced Specialization</p>
+              
+              <!-- Conic Progress -->
+              <div class="relative w-36 h-36 rounded-full conic-progress flex items-center justify-center shadow-inner mb-6">
+                 <div class="w-28 h-28 bg-white rounded-full flex items-center justify-center shadow-md">
+                    <span class="text-3xl font-black text-gray-900">85<span class="text-lg text-gray-400">%</span></span>
+                 </div>
+              </div>
+
+              <!-- Avatar Stack -->
+              <div class="flex -space-x-4 mb-2">
+                 <div class="w-10 h-10 rounded-full border-2 border-white bg-gradient-to-tr from-brand-300 to-brand-500"></div>
+                 <div class="w-10 h-10 rounded-full border-2 border-white bg-gradient-to-tr from-brand-400 to-brand-600"></div>
+                 <div class="w-10 h-10 rounded-full border-2 border-white bg-gradient-to-tr from-brand-500 to-brand-700"></div>
+                 <div class="w-10 h-10 rounded-full border-2 border-white bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-600">+12k</div>
+              </div>
+           </div>
+
+           <!-- Card 3: Live AI Session (Front Right) -->
+           <div class="absolute w-64 h-56 glass-panel rounded-[2rem] p-6 flex flex-col justify-between animate-float-fast z-20 transition-all duration-700 hover:-translate-y-8 cursor-pointer" style="transform: translate(150px, 60px) translateZ(150px) rotateY(-10deg) rotate(5deg);">
+              <div class="flex items-center justify-between">
+                 <div class="flex items-center gap-2">
+                    <div class="w-2.5 h-2.5 bg-brand-500 rounded-full shadow-[0_0_10px_var(--color-brand-500)] animate-pulse"></div>
+                    <span class="text-xs font-bold text-brand-600 uppercase tracking-widest">Live AI</span>
+                 </div>
+                 <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                    <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                 </div>
+              </div>
+              
+              <!-- Audio Waveform -->
+              <div class="flex items-end justify-between h-12 gap-1 px-2">
+                 <div class="w-full bg-brand-400 rounded-full animate-[wave_1s_ease-in-out_infinite_0.1s]" style="height: 40%"></div>
+                 <div class="w-full bg-brand-400 rounded-full animate-[wave_1.2s_ease-in-out_infinite_0.2s]" style="height: 70%"></div>
+                 <div class="w-full bg-brand-500 rounded-full animate-[wave_0.8s_ease-in-out_infinite_0.3s]" style="height: 100%"></div>
+                 <div class="w-full bg-brand-400 rounded-full animate-[wave_1.1s_ease-in-out_infinite_0.4s]" style="height: 50%"></div>
+                 <div class="w-full bg-brand-300 rounded-full animate-[wave_0.9s_ease-in-out_infinite_0.5s]" style="height: 80%"></div>
+                 <div class="w-full bg-brand-400 rounded-full animate-[wave_1s_ease-in-out_infinite_0.6s]" style="height: 30%"></div>
+              </div>
+
+              <div>
+                 <h4 class="text-gray-900 font-bold">Alena Tutor</h4>
+                 <p class="text-xs text-gray-500">Speaking...</p>
+              </div>
+           </div>
+           
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bento Grid Features Section -->
+  <section id="features" class="py-32 relative z-20">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-20 section-title">
+        <h2 class="text-4xl md:text-6xl font-black text-gray-900 mb-6 tracking-tight">Everything you need. <br/><span class="text-gray-400">In one place.</span></h2>
+      </div>
+
+      <!-- Bento Grid Layout -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
+        
+        <!-- Large Card 1 -->
+        <div class="md:col-span-2 glass-card rounded-[2rem] p-10 flex flex-col justify-end relative overflow-hidden group bento-card">
+          <div class="absolute top-0 right-0 w-64 h-64 bg-brand-100 rounded-full blur-[80px] -mr-20 -mt-20 transition-transform group-hover:scale-150 duration-700"></div>
+          <div class="relative z-10">
+            <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-sm border border-gray-100 bento-icon-wrapper animate-float-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-brand-500">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
+              </svg>
+            </div>
+            <h3 class="text-3xl font-bold text-gray-900 mb-3">Adaptive Learning</h3>
+            <p class="text-gray-600 text-lg max-w-md">AI-driven paths tailored perfectly to your unique pace and learning style.</p>
+          </div>
+        </div>
+
+        <!-- Small Card 1 -->
+        <div class="glass-card rounded-[2rem] p-8 flex flex-col justify-end relative overflow-hidden group bento-card">
+          <div class="relative z-10">
+            <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-4 shadow-sm border border-gray-100 bento-icon-wrapper animate-float-icon" style="animation-delay: 1s;">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-brand-600">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Virtual Classrooms</h3>
+            <p class="text-gray-600">Immersive environments bridging remote and reality.</p>
+          </div>
+        </div>
+
+        <!-- Small Card 2 -->
+        <div class="glass-card rounded-[2rem] p-8 flex flex-col justify-end relative overflow-hidden group bento-card">
+          <div class="relative z-10">
+            <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-4 shadow-sm border border-gray-100 bento-icon-wrapper animate-float-icon" style="animation-delay: 2s;">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-brand-700">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 0 1 3 3h-15a3 3 0 0 1 3-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 0 1-.982-3.172M9.497 14.25a7.454 7.454 0 0 0 .981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 0 0 7.73 9.728M18.75 4.236c.982.143 1.954.317 2.916.52a6.003 6.003 0 0 1-5.395 4.972m0 0a8.001 8.001 0 0 0-10.522 0m10.522 0L17.25 2.25h-10.5l.483 6.998" />
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Gamification</h3>
+            <p class="text-gray-600">Earn points and unlock badges as you learn.</p>
+          </div>
+        </div>
+
+        <!-- Large Card 2 -->
+        <div class="md:col-span-2 glass-card rounded-[2rem] p-10 flex flex-col justify-end relative overflow-hidden group bento-card">
+           <div class="absolute top-0 left-0 w-64 h-64 bg-brand-100 rounded-full blur-[80px] -ml-20 -mt-20 transition-transform group-hover:scale-150 duration-700"></div>
+          <div class="relative z-10">
+            <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-sm border border-gray-100 bento-icon-wrapper animate-float-icon" style="animation-delay: 3s;">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-brand-800">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+              </svg>
+            </div>
+            <h3 class="text-3xl font-bold text-gray-900 mb-3">Detailed Analytics</h3>
+            <p class="text-gray-600 text-lg max-w-md">Track your progress with real-time insights and advanced reporting dashboards.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Footer -->
+  <footer class="mt-20 pb-20">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="bg-gray-900 rounded-[3rem] p-16 md:p-24 text-center relative overflow-hidden shadow-2xl">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b from-brand-600/20 to-transparent pointer-events-none"></div>
+        <h2 class="text-4xl md:text-6xl font-black text-white mb-8 tracking-tight relative z-10">Ready to transform?</h2>
+        <a routerLink="/register" class="inline-block bg-white text-gray-900 px-10 py-5 rounded-full text-xl font-bold shadow-lg hover:scale-105 transition-transform relative z-10">
+          Create Your Account
+        </a>
+      </div>
+    </div>
+  </footer>
+
+</div>

@@ -1,0 +1,47 @@
+<div class="modal-backdrop" #modalBackdrop (click)="onClose()">
+  <div class="modal-container" #modalContent (click)="$event.stopPropagation()">
+    
+    <div class="modal-header">
+      <div class="flex items-center gap-4">
+        <img [src]="student().avatarUrl" alt="{{ student().studentName }}" class="avatar">
+        <div>
+          <h2 class="text-2xl font-bold text-gray-900">{{ student().studentName }}</h2>
+          <p class="text-brand-600 font-medium">{{ student().studentEmail || 'student@example.com' }}</p>
+        </div>
+      </div>
+      <button class="close-btn" (click)="onClose()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-label">Current Course</span>
+          <span class="stat-value text-gray-800">{{ student().enrolledCourse }}</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Progress</span>
+          <span class="stat-value text-brand-600">{{ student().progressPercentage }}%</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Current Score</span>
+          <span class="stat-value text-emerald-600">{{ student().currentScore }}</span>
+        </div>
+      </div>
+
+      <div class="progress-section">
+        <h3 class="section-title">Course Progress Overview</h3>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" [style.width.%]="student().progressPercentage"></div>
+        </div>
+      </div>
+      
+      <div class="actions-section">
+        <button class="btn btn-outline" (click)="onClose()">Message Student</button>
+        <button class="btn btn-primary" (click)="onClose()">View Full History</button>
+      </div>
+    </div>
+
+  </div>
+</div>

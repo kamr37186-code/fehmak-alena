@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Blue and Baby Blue Theme */
+  --color-brand-50: #F0F9FF;
+  --color-brand-100: #E0F2FE;
+  --color-brand-200: #f76161;
+  --color-brand-300: #fc7d7d;
+  --color-brand-400: #f83858;
+  --color-brand-500: #e90e50;
+  --color-brand-600: #c7024d;
+  --color-brand-700: #fd5c5c;
+  --color-brand-800: #ff5b5b;
+  --color-brand-900: #f85353;
+  --color-brand-1000: #082F49;
+
+}
+
+/* Accessibility: High Contrast Mode */
+body.high-contrast {
+  background-color: #000000 !important;
+  color: #FFFF00 !important;
+}
+
+body.high-contrast * {
+  background-color: #000000 !important;
+  color: #FFFF00 !important;
+  border-color: #FFFF00 !important;
+}
+
+body.high-contrast svg {
+  color: #FFFF00 !important;
+  stroke: #FFFF00 !important;
+}
+
+/* Accessibility: Reduced Motion */
+body.reduced-motion * {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+/* Accessibility: Color Blindness Filter */
+/* Standard filter simulating a correction for Protanopia/Deuteranopia */
+body.color-blind-filter {
+  filter: contrast(1.2) saturate(1.5) sepia(0.3) hue-rotate(-10deg) !important;
+}
+
+/* Hide scrollbar for UI elements that should scroll silently */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom Global Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-brand-50);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand-300);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-500);
+}
+
+/* Firefox support */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-brand-300) var(--color-brand-50);
+}

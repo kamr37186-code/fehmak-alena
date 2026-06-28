@@ -1,0 +1,285 @@
+<div class="max-w-7xl mx-auto space-y-6 pb-12 overflow-x-hidden">
+
+  <!-- Header Area -->
+  <div class="header-content flex justify-between items-end mb-8">
+    <div>
+      <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Instructor Command Center</h1>
+      <p class="text-brand-600 font-semibold mt-1">Welcome back, {{ userName }}</p>
+      <p class="text-gray-500 mt-1">Real-time monitoring and analytics for your active courses.</p>
+    </div>
+    <div class="flex gap-3">
+      <button class="px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 hover:text-brand-600 font-medium transition-colors flex items-center gap-2 transform hover:-translate-y-0.5 duration-200">
+        <i class="fa-solid fa-file-export"></i>
+        Export Reports
+      </button>
+      <button (click)="navigateToCourses()" class="px-4 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 font-medium shadow-sm transition-all flex items-center gap-2 transform hover:-translate-y-0.5 duration-200">
+        <i class="fa-solid fa-plus"></i>
+        Create New Module
+      </button>
+    </div>
+  </div>
+
+  <!-- Cheating Detection Alert -->
+  @if(suspiciousSessions > 0) {
+  <div class="alert-banner bg-red-50 border-l-4 border-red-500 rounded-r-xl p-5 flex items-center justify-between">
+    <div class="flex items-center gap-4">
+      <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600">
+        <i class="fa-solid fa-triangle-exclamation text-lg"></i>
+      </div>
+      <div>
+        <h4 class="font-bold text-red-800">Cheating Detection Alerts</h4>
+        <p class="text-red-700 text-sm">{{ suspiciousSessions }} suspicious exam sessions detected recently. Immediate review required.</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <button (click)="navigateToIntegrity()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 font-medium text-sm transition-colors">Review Flags</button>
+    </div>
+  </div>
+  }
+
+  <!-- Stats Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div #gsapCard class="bg-white rounded-xl border border-gray-200 p-6 hover:border-brand-200 transition-colors duration-300 group cursor-default">
+      <div class="flex items-center justify-between mb-3">
+        <span class="text-sm font-medium text-gray-500 group-hover:text-brand-600 transition-colors">Total Active Students</span>
+        <div class="w-10 h-10 rounded-lg bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-brand-50 group-hover:text-brand-500 transition-all duration-300">
+          <i class="fa-solid fa-users"></i>
+        </div>
+      </div>
+      <p class="text-3xl font-bold text-gray-900">{{ dashboardData?.stats?.totalActiveStudents || '0' }}</p>
+      <p class="text-sm text-brand-600 mt-1 flex items-center gap-1 font-medium">
+        <i class="fa-solid fa-arrow-trend-up"></i>
+        +12% from last semester
+      </p>
+    </div>
+    
+    <div #gsapCard class="bg-white rounded-xl border border-gray-200 p-6 hover:border-brand-200 transition-colors duration-300 group cursor-default">
+      <div class="flex items-center justify-between mb-3">
+        <span class="text-sm font-medium text-gray-500 group-hover:text-brand-600 transition-colors">Avg. Course Score</span>
+        <div class="w-10 h-10 rounded-lg bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-brand-50 group-hover:text-brand-500 transition-all duration-300">
+          <i class="fa-solid fa-chart-line"></i>
+        </div>
+      </div>
+      <p class="text-3xl font-bold text-gray-900">{{ dashboardData?.stats?.avgCourseScore || '0' }}%</p>
+      <p class="text-sm text-brand-600 mt-1 flex items-center gap-1 font-medium">
+        <i class="fa-solid fa-arrow-trend-up"></i>
+        +4.1% class performance trend
+      </p>
+    </div>
+
+    <div #gsapCard class="bg-white rounded-xl border border-gray-200 p-6 hover:border-brand-200 transition-colors duration-300 group cursor-default">
+      <div class="flex items-center justify-between mb-3">
+        <span class="text-sm font-medium text-gray-500 group-hover:text-brand-600 transition-colors">Completion Rate</span>
+        <div class="w-10 h-10 rounded-lg bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-brand-50 group-hover:text-brand-500 transition-all duration-300">
+          <i class="fa-solid fa-check-double"></i>
+        </div>
+      </div>
+      <p class="text-3xl font-bold text-gray-900">{{ dashboardData?.stats?.completionRate || '0' }}%</p>
+      <p class="text-sm text-brand-600 mt-1 flex items-center gap-1 font-medium">
+        <i class="fa-solid fa-arrow-trend-up"></i>
+        +0.8% projected for finals
+      </p>
+    </div>
+  </div>
+
+  <!-- Student Academic Progress Table -->
+  <div #gsapCard class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+    <div class="p-6 border-b border-gray-100 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div>
+        <h3 class="text-lg font-bold text-gray-900">Student Academic Progress</h3>
+        <p class="text-sm text-gray-500 mt-1">Comprehensive overview of enrollment, progress, and performance metrics.</p>
+      </div>
+      <div class="flex items-center gap-3 w-full md:w-auto">
+        <div class="relative w-full md:w-64">
+          <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+          <input type="text" placeholder="Filter by course..." class="w-full pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-all">
+        </div>
+      </div>
+    </div>
+    
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead>
+          <tr class="bg-gray-50 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+            <th class="px-6 py-4">Student</th>
+            <th class="px-6 py-4">Enrolled Course</th>
+            <th class="px-6 py-4">Progress</th>
+            <th class="px-6 py-4">Current Score</th>
+            <th class="px-6 py-4">Quick Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+          @if (isLoading) {
+            <tr>
+              <td colspan="5" class="px-6 py-12 text-center">
+                <i class="fa-solid fa-circle-notch fa-spin text-brand-500 text-3xl"></i>
+                <p class="text-gray-500 mt-3 font-medium">Loading student data...</p>
+              </td>
+            </tr>
+          } @else {
+            @for (student of dashboardData?.studentProgress; track student.id) {
+            <tr #gsapRow class="hover:bg-gray-50/50 transition-colors group">
+              <td class="px-6 py-4">
+                <div class="flex items-center gap-3">
+                  <img class="w-9 h-9 rounded-full border border-gray-200" [src]="student.avatarUrl" alt="">
+                  <div>
+                    <p class="text-sm font-semibold text-gray-900 group-hover:text-brand-600 transition-colors">{{ student.studentName }}</p>
+                    <p class="text-xs text-gray-500">ID: {{ student.id }}</p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-6 py-4">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-700 border border-gray-200">
+                  {{ student.enrolledCourse }}
+                </span>
+              </td>
+              <td class="px-6 py-4">
+                <div class="w-full max-w-xs">
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="text-xs font-medium text-gray-700">{{ student.progressPercentage }}%</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-1.5 overflow-hidden">
+                    <div class="bg-brand-500 h-1.5 rounded-full transition-all duration-1000 ease-out" [style.width.%]="student.progressPercentage"></div>
+                  </div>
+                </div>
+              </td>
+              <td class="px-6 py-4">
+                <span class="text-sm font-semibold text-gray-900 px-3 py-1 bg-white rounded border border-gray-200 inline-block min-w-[3rem] text-center">
+                  {{ student.currentScore }}
+                </span>
+              </td>
+              <td class="px-6 py-4">
+                <div class="flex items-center gap-2">
+                  <button (click)="viewStudentDetails(student)" class="text-xs text-brand-600 hover:text-brand-800 hover:bg-brand-50 px-3 py-1.5 rounded-lg font-medium flex items-center gap-1.5 transition-all">
+                    <i class="fa-solid fa-eye"></i>
+                    Details
+                  </button>
+                  <button class="w-8 h-8 rounded-lg text-gray-400 hover:bg-gray-100 hover:text-brand-600 flex items-center justify-center transition-all">
+                    <i class="fa-solid fa-envelope"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            } @empty {
+            <tr>
+              <td colspan="5" class="px-6 py-12 text-center text-gray-500">
+                <div class="flex flex-col items-center justify-center">
+                  <i class="fa-solid fa-users-slash text-4xl text-gray-300 mb-3"></i>
+                  <p class="font-medium text-gray-600">No student data available.</p>
+                  <p class="text-sm text-gray-400 mt-1">Enrollments will appear here once students join your courses.</p>
+                </div>
+              </td>
+            </tr>
+            }
+          }
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between bg-gray-50">
+      <p class="text-sm text-gray-500 font-medium">Showing <span class="font-semibold text-gray-900">{{ dashboardData?.studentProgress?.length || 0 }}</span> of <span class="font-semibold text-gray-900">{{ dashboardData?.totalStudents || 0 }}</span> students</p>
+      <div class="flex items-center gap-2">
+        <button class="px-3 py-1 text-sm font-medium text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded transition-colors" disabled>Previous</button>
+        <button class="px-3 py-1 text-sm font-semibold text-brand-700 bg-brand-50 border border-brand-200 rounded">1</button>
+        <button class="px-3 py-1 text-sm font-medium text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded transition-colors" disabled>Next</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Row -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Upcoming Live Sessions -->
+    <div #gsapCard class="bg-white rounded-xl border border-gray-200 p-6">
+      <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2 mb-5">
+        <div class="w-8 h-8 rounded-lg bg-gray-50 text-gray-500 flex items-center justify-center border border-gray-100">
+          <i class="fa-solid fa-video"></i>
+        </div>
+        Upcoming Live Sessions
+      </h3>
+      <div class="space-y-3">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-lg border border-gray-100 hover:border-brand-200 hover:bg-gray-50 transition-colors group cursor-pointer">
+          <div class="flex items-center gap-4 mb-3 sm:mb-0">
+            <div class="w-12 h-12 rounded border border-gray-200 bg-white flex flex-col items-center justify-center group-hover:border-brand-300 transition-colors">
+              <span class="text-[10px] font-semibold text-gray-500 uppercase">Today</span>
+              <span class="text-lg font-bold text-gray-900 leading-none">14</span>
+            </div>
+            <div>
+              <p class="font-semibold text-gray-900 group-hover:text-brand-600 transition-colors">Ethics in Generative AI</p>
+              <p class="text-xs text-gray-500 font-medium mt-0.5"><i class="fa-regular fa-clock mr-1"></i> 14:00 PM - 15:30 PM</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="text-right">
+              <p class="text-sm font-semibold text-gray-900">{{ dashboardData?.stats?.liveSession1Joined || '0' }}</p>
+              <p class="text-[10px] uppercase tracking-wider text-gray-500">Joined</p>
+            </div>
+            <button class="w-8 h-8 rounded-full text-gray-400 group-hover:text-brand-600 flex items-center justify-center transition-colors">
+              <i class="fa-solid fa-chevron-right text-sm"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-lg border border-gray-100 hover:border-brand-200 hover:bg-gray-50 transition-colors group cursor-pointer">
+          <div class="flex items-center gap-4 mb-3 sm:mb-0">
+            <div class="w-12 h-12 rounded border border-gray-200 bg-white flex flex-col items-center justify-center group-hover:border-brand-300 transition-colors">
+              <span class="text-[10px] font-semibold text-gray-500 uppercase">Tmrw</span>
+              <span class="text-lg font-bold text-gray-900 leading-none">15</span>
+            </div>
+            <div>
+              <p class="font-semibold text-gray-900 group-hover:text-brand-600 transition-colors">Q&A: Neural Architecture</p>
+              <p class="text-xs text-gray-500 font-medium mt-0.5"><i class="fa-regular fa-clock mr-1"></i> 09:30 AM - 11:00 AM</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="text-right">
+              <p class="text-sm font-semibold text-gray-900">{{ dashboardData?.stats?.liveSession2Joined || '0' }}</p>
+              <p class="text-[10px] uppercase tracking-wider text-gray-500">Joined</p>
+            </div>
+            <button class="w-8 h-8 rounded-full text-gray-400 group-hover:text-brand-600 flex items-center justify-center transition-colors">
+              <i class="fa-solid fa-chevron-right text-sm"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <button class="w-full mt-4 py-2 border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-50 hover:text-gray-900 font-medium text-sm transition-colors">View Schedule</button>
+    </div>
+
+    <!-- Resource Management -->
+    <div #gsapCard class="bg-white rounded-xl border border-gray-200 p-6 flex flex-col">
+      <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2 mb-5">
+        <div class="w-8 h-8 rounded-lg bg-gray-50 text-gray-500 flex items-center justify-center border border-gray-100">
+          <i class="fa-solid fa-folder-open"></i>
+        </div>
+        Resource Management
+      </h3>
+      <div class="grid grid-cols-2 gap-4 mb-auto">
+        <div class="rounded-lg p-5 text-center border border-gray-100 hover:border-brand-200 hover:bg-gray-50 transition-colors cursor-pointer group">
+          <div class="w-10 h-10 mx-auto rounded border border-gray-100 bg-white flex items-center justify-center text-gray-400 group-hover:text-brand-500 mb-3 transition-colors">
+            <i class="fa-solid fa-file-signature"></i>
+          </div>
+          <p class="text-2xl font-bold text-gray-900">{{ dashboardData?.stats?.pendingAssignments || '0' }}</p>
+          <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mt-1">Pending Grads</p>
+        </div>
+        <div class="rounded-lg p-5 text-center border border-gray-100 hover:border-brand-200 hover:bg-gray-50 transition-colors cursor-pointer group">
+          <div class="w-10 h-10 mx-auto rounded border border-gray-100 bg-white flex items-center justify-center text-gray-400 group-hover:text-brand-500 mb-3 transition-colors">
+            <i class="fa-solid fa-comments"></i>
+          </div>
+          <p class="text-2xl font-bold text-gray-900">{{ dashboardData?.stats?.newDiscussions || '0' }}</p>
+          <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mt-1">New Posts</p>
+        </div>
+      </div>
+      <button (click)="navigateToCourses()" class="w-full mt-6 py-2.5 bg-brand-600 text-white rounded-lg hover:bg-brand-700 font-medium transition-colors flex items-center justify-center gap-2">
+        <i class="fa-solid fa-layer-group"></i>
+        Open Content Manager
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Render the Student Profile Modal when a student is selected -->
+@if (selectedStudent) {
+  <app-student-profile-modal 
+    [student]="selectedStudent" 
+    (close)="closeStudentDetails()">
+  </app-student-profile-modal>
+}

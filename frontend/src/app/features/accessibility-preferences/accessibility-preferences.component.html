@@ -1,0 +1,195 @@
+<div class="max-w-4xl mx-auto space-y-8 pb-12">
+
+  <!-- Page Header -->
+  <div>
+    <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Accessibility & AI Preferences</h1>
+    <p class="text-gray-500 mt-2">Customize your learning environment and AI interaction style for maximum comfort and efficiency.</p>
+  </div>
+
+  <!-- Visual & Interface Section -->
+  <div>
+    <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2 mb-5">
+      <svg class="w-5 h-5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+      Visual & Interface
+    </h2>
+    <div class="bg-white rounded-2xl border border-gray-100 divide-y divide-gray-100 shadow-sm">
+      <!-- High Contrast Mode -->
+      <div class="flex items-center justify-between px-6 py-5">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-500">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-900">High Contrast Mode</p>
+            <p class="text-sm text-gray-500">Enhances clarity by increasing contrast between text and background elements.</p>
+          </div>
+        </div>
+        <label class="relative inline-flex items-center cursor-pointer">
+          <input type="checkbox" class="sr-only peer" [(ngModel)]="preferences.highContrastMode">
+          <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand-100 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-500"></div>
+        </label>
+      </div>
+      <!-- Color Blindness Filters -->
+      <div class="flex items-center justify-between px-6 py-5">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center text-red-500">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-900">Color Blindness Filters</p>
+            <p class="text-sm text-gray-500">Apply specialized color palettes for Protanopia, Deuteranopia, or Tritanopia.</p>
+          </div>
+        </div>
+        <label class="relative inline-flex items-center cursor-pointer">
+          <input type="checkbox" class="sr-only peer" [(ngModel)]="preferences.colorBlindnessFilters">
+          <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand-100 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-500"></div>
+        </label>
+      </div>
+      <!-- Text Scaling -->
+      <div class="flex items-center justify-between px-6 py-5">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-500">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-900">Text Scaling</p>
+            <p class="text-sm text-gray-500">Adjust global font size across the platform. Current: {{ preferences.textScaling }}%</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 w-64">
+          <span class="text-xs text-gray-400">80%</span>
+          <input type="range" min="80" max="150" [(ngModel)]="preferences.textScaling" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-brand-500">
+          <span class="text-xs text-gray-400">150%</span>
+        </div>
+      </div>
+      <!-- Reduced Motion -->
+      <div class="flex items-center justify-between px-6 py-5">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-500">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-900">Reduced Motion</p>
+            <p class="text-sm text-gray-500">Disables UI animations and transitions to reduce visual stimuli.</p>
+          </div>
+        </div>
+        <label class="relative inline-flex items-center cursor-pointer">
+          <input type="checkbox" class="sr-only peer" [(ngModel)]="preferences.reducedMotion">
+          <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand-100 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-500"></div>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Learning Persona Section -->
+  <div>
+    <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2 mb-2">
+      <svg class="w-5 h-5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+      AI Learning Persona
+    </h2>
+    <p class="text-sm text-gray-500 mb-5">Choose the teaching philosophy your AI tutor will adopt during conversations and personalized paths.</p>
+    <div class="grid grid-cols-2 gap-4">
+      <!-- Socratic Tutor -->
+      <div (click)="setPersona('Socratic Tutor')"
+        class="relative bg-white rounded-xl p-5 cursor-pointer shadow-sm transition-all"
+        [ngClass]="{'border-2 border-brand-500': preferences.aiPersona === 'Socratic Tutor', 'border border-gray-200 hover:border-brand-300': preferences.aiPersona !== 'Socratic Tutor'}">
+        @if (preferences.aiPersona === 'Socratic Tutor') {
+          <span class="absolute top-3 right-3 px-2 py-0.5 bg-brand-500 text-white text-[10px] font-bold rounded-full">Active</span>
+        }
+        <div class="w-10 h-10 rounded-full flex items-center justify-center mb-3"
+          [ngClass]="{'bg-brand-50 text-brand-600': preferences.aiPersona === 'Socratic Tutor', 'bg-gray-100 text-gray-500': preferences.aiPersona !== 'Socratic Tutor'}">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+        <h4 class="font-bold text-gray-900 flex items-center gap-2">Socratic Tutor @if (preferences.aiPersona === 'Socratic Tutor') {
+          <svg class="w-4 h-4 text-brand-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+        }</h4>
+        <p class="text-sm text-gray-500 mt-1">The AI will ask guiding questions to help you discover answers on your own. Best for deep conceptual understanding.</p>
+      </div>
+      <!-- Direct Instructor -->
+      <div (click)="setPersona('Direct Instructor')"
+        class="bg-white rounded-xl p-5 cursor-pointer transition-all relative"
+        [ngClass]="{'border-2 border-brand-500': preferences.aiPersona === 'Direct Instructor', 'border border-gray-200 hover:border-brand-300': preferences.aiPersona !== 'Direct Instructor'}">
+        @if (preferences.aiPersona === 'Direct Instructor') {
+          <span class="absolute top-3 right-3 px-2 py-0.5 bg-brand-500 text-white text-[10px] font-bold rounded-full">Active</span>
+        }
+        <div class="w-10 h-10 rounded-full flex items-center justify-center mb-3"
+          [ngClass]="{'bg-brand-50 text-brand-600': preferences.aiPersona === 'Direct Instructor', 'bg-gray-100 text-gray-500': preferences.aiPersona !== 'Direct Instructor'}">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+        </div>
+        <h4 class="font-bold text-gray-900 flex items-center gap-2">Direct Instructor @if (preferences.aiPersona === 'Direct Instructor') {
+          <svg class="w-4 h-4 text-brand-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+        }</h4>
+        <p class="text-sm text-gray-500 mt-1">Concise, clear explanations with a focus on efficiency and "how-to" steps. Best for quick learning and review.</p>
+      </div>
+      <!-- Visual Specialist -->
+      <div (click)="setPersona('Visual Specialist')"
+        class="bg-white rounded-xl p-5 cursor-pointer transition-all relative"
+        [ngClass]="{'border-2 border-brand-500': preferences.aiPersona === 'Visual Specialist', 'border border-gray-200 hover:border-brand-300': preferences.aiPersona !== 'Visual Specialist'}">
+        @if (preferences.aiPersona === 'Visual Specialist') {
+          <span class="absolute top-3 right-3 px-2 py-0.5 bg-brand-500 text-white text-[10px] font-bold rounded-full">Active</span>
+        }
+        <div class="w-10 h-10 rounded-full flex items-center justify-center mb-3"
+          [ngClass]="{'bg-brand-50 text-brand-600': preferences.aiPersona === 'Visual Specialist', 'bg-gray-100 text-gray-500': preferences.aiPersona !== 'Visual Specialist'}">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+        </div>
+        <h4 class="font-bold text-gray-900 flex items-center gap-2">Visual Specialist @if (preferences.aiPersona === 'Visual Specialist') {
+          <svg class="w-4 h-4 text-brand-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+        }</h4>
+        <p class="text-sm text-gray-500 mt-1">Prioritizes diagrams, charts, and video content in explanations. Perfect for spatial learners.</p>
+      </div>
+      <!-- Storyteller -->
+      <div (click)="setPersona('Storyteller')"
+        class="bg-white rounded-xl p-5 cursor-pointer transition-all relative"
+        [ngClass]="{'border-2 border-brand-500': preferences.aiPersona === 'Storyteller', 'border border-gray-200 hover:border-brand-300': preferences.aiPersona !== 'Storyteller'}">
+        @if (preferences.aiPersona === 'Storyteller') {
+          <span class="absolute top-3 right-3 px-2 py-0.5 bg-brand-500 text-white text-[10px] font-bold rounded-full">Active</span>
+        }
+        <div class="w-10 h-10 rounded-full flex items-center justify-center mb-3"
+          [ngClass]="{'bg-brand-50 text-brand-600': preferences.aiPersona === 'Storyteller', 'bg-gray-100 text-gray-500': preferences.aiPersona !== 'Storyteller'}">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+        </div>
+        <h4 class="font-bold text-gray-900 flex items-center gap-2">Storyteller @if (preferences.aiPersona === 'Storyteller') {
+          <svg class="w-4 h-4 text-brand-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+        }</h4>
+        <p class="text-sm text-gray-500 mt-1">Uses analogies, case studies, and real-world narratives to explain complex topics. Best for engagement.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Save Section -->
+  <div class="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm flex items-center justify-between">
+    <div class="flex flex-col">
+      <p class="text-sm text-gray-500 flex items-center gap-2">
+        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        All settings are auto-synced to your cloud profile.
+      </p>
+      @if (showSuccess) {
+        <p class="text-sm text-green-600 font-medium mt-1">
+          Changes saved successfully!
+        </p>
+      }
+    </div>
+    <div class="flex items-center gap-3">
+      <button (click)="resetDefaults()" class="px-4 py-2 border border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 font-medium text-sm transition-colors">Reset Defaults</button>
+      <button (click)="savePreferences()" [disabled]="isSaving" class="px-5 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 font-medium text-sm shadow-md transition-all flex items-center gap-2 disabled:opacity-50">
+        @if (!isSaving) {
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
+        }
+        @if (isSaving) {
+          <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+        }
+        {{ isSaving ? 'Saving...' : 'Save Changes' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Help Box -->
+  <div class="bg-gray-50 rounded-2xl border border-gray-200 border-dashed p-8 text-center">
+    <div class="w-12 h-12 rounded-full bg-brand-50 text-brand-500 flex items-center justify-center mx-auto mb-4">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+    </div>
+    <h4 class="font-bold text-gray-900 mb-2">Need assistance with your setup?</h4>
+    <p class="text-sm text-gray-500 mb-5 max-w-md mx-auto">Our 24/7 AI Tutor can guide you through these accessibility features or help you choose the right AI Profile.</p>
+    <button routerLink="/ai-chat" class="px-6 py-2.5 bg-white border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition-colors">Talk to Support AI</button>
+  </div>
+</div>
